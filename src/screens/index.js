@@ -1,3 +1,5 @@
 export * from './sign-up-screen'
 export * from './sign-in-screen'
+export * from './explore-screen'
 export * from './home-screen'
+export * from './post-screen'
