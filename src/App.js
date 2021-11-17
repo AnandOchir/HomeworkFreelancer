@@ -1,21 +1,20 @@
-import React from 'react'
-import { useDoc } from './Hooks';
+import React from "react";
+import { BrowserRouter, Routes , Route } from 'react-router-dom'
+import { AuthUserProvider } from "./Providers/auth-provider";
+import { HomeScreen, SignInScreen, SignUpScreen } from "./screens";
 
 const App = () => {
-  const { updateRecord } = useDoc('a/b')
-  const Send = () => {
-    updateRecord({
-      'test': 'c'
-    })
-  }
   return (
-    <div>
-      <button onClick={Send} >
-        click me
-      </button>
-      Test
-    </div>
+    <AuthUserProvider >
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomeScreen />}/>
+          <Route path='/sign-up' element={<SignUpScreen />}/>
+          <Route path='/sign-in' element={<SignInScreen />}/>
+        </Routes>
+      </BrowserRouter>
+    </AuthUserProvider>
   );
-}
+};
 
 export default App;
