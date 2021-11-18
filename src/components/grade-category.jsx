@@ -1,13 +1,38 @@
-import React from 'react'
-import { Box, colors } from '../common-components'
-import { GradeCard } from './grade-card'
+import React, { useState, useEffect } from 'react'
+import { Box } from '../common-components'
+import { TagCard } from './tag-card'
 
-const grades = ['6-р анги', '7-р анги', '8-р анги', '9-р анги', '10-р анги', '11-р анги', '12-р анги', '1-р курс', '2-р курс', '3-р курс', '4-р курс']
+const TAGS = ['6р анги', '7р анги', '8р анги', '9р анги', '10р анги', '11р анги', '12р анги', 
+              '1р курс', '2р курс', '3р курс', '4р курс', 'Монгол хэл', 'Англи хэл', 
+              'Физик', 'Газар зүй', 'Хими', 'Математик', 'Монголын түүх', 'Орос хэл',
+              'Үндэсний бичиг', 'түүх', 'Уран зохиол', 'Мэдээллийн технологи', 'Нийгэм судлал',
+              'Дизайн технологи', 'Эрүүл мэнд', 'Биологи', 'Иргэний ёс зүйн боловсрол', 
+              'Иргэний боловсрол',　'Математик1', 'Математик2'
+            ]
 
-export const GradeCategory = () => {
+export const GradeCategory = ({ array, setArray }) => {
+  const [clickedTags, setClickedTags] = useState([]);
+  let [newArray, setNewArray] = useState([]);
+
+  const Filter = async (tag) => {
+    setClickedTags([...clickedTags, tag])
+
+    await array.map((homework, i) => {
+      homework.tags.includes(tag) && setNewArray(newArray => [...newArray, homework])
+    })
+
+    console.log(newArray)
+    // setArray(newArray)
+  }
+
   return (
-    <Box width='95vw' height='50px' borderColor={colors.borderColor} br='5px' mt='5vh' display='flex' direction='row' justify='space-evenly' items='center'>
-        {grades.map((grade, i) => <GradeCard grade={grade} key={i}/>)}
+    <Box>
+      <Box width='95vw' br='5px' mt='5vh' display='flex' direction='row' items='center' wrap='wrap'>
+        {TAGS.map((tag, i) => <TagCard tag={tag} key={i} onClick={() => Filter(tag)}/>)}
+      </Box>
+      <Box mt='5vh'>
+          {clickedTags.map((tag, i) => <TagCard tag={tag} key={i}/>)}
+      </Box>
     </Box>
   );
 }

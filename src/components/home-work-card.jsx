@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, Text, Image, colors } from '../common-components'
 
 export const HomeWorkCard = ({ imgUrl, name, price, description, uid, title }) => {
-  console.log(name, price)
   return (
     <Box width='300px' min_height='320px' br='10px' m='30px' borderColor={colors.borderColor} overflow='hidden'>
       <Image src={imgUrl} height='200px'/>
