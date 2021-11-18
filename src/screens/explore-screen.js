@@ -13,7 +13,7 @@ const MockHomeworks = [
 
 export const ExploreScreen = () => {
   return (
-    <Box width='100vw' display='flex' justify='space-evenly' direction='column' items='center' background='white'>
+    <Box width='100vw' display='flex' justify='space-evenly' direction='column' items='center' background='white' mt='50px'>
         <GradeCategory/>
         <Box display='flex' direction='row' wrap='wrap'>
             {MockHomeworks.map((hw, i) => <HomeWorkCard {...hw} key={i}/>)}
