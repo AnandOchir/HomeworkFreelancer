@@ -1,24 +1,88 @@
-import React, { useState } from 'react'
-import { Box } from '../common-components';
-import { HomeWorkCard } from '../components';
-
-const MockHomeworks = [
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Mongol helnii surah bicgiin buh daalgavr', title: 'Mongol hel 9-r angi', tags: ['9р анги', 'Монгол хэл'] },
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Math ez bolhoor ci nadad hergu', title: 'Mat 7-r angi', tags: ['Математик', '7р анги'] },
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Angli heleer 200 ugtei essay biceh daalgavr heregtei bn', title: 'English 8-r angi', tags: ['Математик', '7р анги'] },
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Mongol helnii surah bicgiin buh daalgavr', title: 'Mongol hel 9-r angi', tags: ['9р анги', 'Монгол хэл'] },
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Math ez bolhoor ci nadad hergu', title: 'Mat 7-r angi', tags: ['Математик', '7р анги'] },
-    { imgUrl: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80', name: 'Testing', price: '5000', uid: 'giutrgnfibngbtrfn', description: 'Angli heleer 200 ugtei essay biceh daalgavr heregtei bn', title: 'English 8-r angi', tags: ['Математик', '7р анги'] },
-]
+import React, { useState, useEffect } from "react";
+import { Box } from "../common-components";
+import { HomeWorkCard } from "../components";
+import { TAGS } from "../datas";
+import { TagCard } from "../components/tag-card";
+import { useCol } from '../Hooks';
 
 export const ExploreScreen = () => {
-  const [homeworks, setHomeworks] = useState(MockHomeworks);
+  const { data } = useCol('posts');
+  const [homeworks, setHomeworks] = useState([]);
+  useEffect(() => {
+    setHomeworks(data)
+  }, [data])
+  const [clickedTags, setClickedTags] = useState([]);
+  const [tags, setTags] = useState(TAGS);
+
+  const Filter = (tag) => {
+    setClickedTags([...clickedTags, tag]);
+
+    setHomeworks(
+      data.filter((hw) => {
+        let test = true;
+
+        [...clickedTags, tag].map((ctag) => {
+          if (hw.tags.includes(ctag) === false) test = false;
+        });
+
+        return test;
+      })
+    );
+
+    setTags(tags.filter((tg) => tg != tag))
+  };
+
+  const reFilter = (tag) => {
+    setTags([...tags, tag]);
+    setClickedTags(clickedTags.filter((tg) => tg != tag))
+
+    setHomeworks(
+      data.filter((hw) => {
+        let test = true;
+
+        clickedTags.filter((tg) => tg != tag).map((ctag) => {
+          if (hw.tags.includes(ctag) === false) test = false;
+        });
+
+        return test;
+      })
+    );
+  }
 
   return (
-    <Box width='100vw' display='flex' justify='space-evenly' direction='column' items='center' background='white'>
-        <Box display='flex' direction='row' wrap='wrap'>
-            {homeworks.map((hw, i) => <HomeWorkCard {...hw} key={i}/>)}
+    <Box
+      width="100vw"
+      display="flex"
+      justify="space-evenly"
+      direction="column"
+      items="center"
+      background="white"
+    >
+      <Box>
+        <Box
+          width="95vw"
+          br="5px"
+          mt="5vh"
+          display="flex"
+          direction="row"
+          items="center"
+          wrap="wrap"
+        >
+          {tags.map((tag, i) => (
+            <TagCard tag={tag} key={i} onClick={() => Filter(tag)} />
+          ))}
         </Box>
+        <Box mt="5vh">
+          {clickedTags.map((tag, i) => (
+            <TagCard tag={tag} key={i} onClick={() => reFilter(tag)}/>
+          ))}
+        </Box>
+      </Box>
+      <Box display="flex" direction="row" wrap="wrap">
+        {homeworks.map((hw, i) => (
+          <HomeWorkCard {...hw} key={i} />
+        ))}
+      </Box>
     </Box>
   );
-}
+};

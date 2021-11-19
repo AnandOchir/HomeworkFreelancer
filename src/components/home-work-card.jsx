@@ -1,15 +1,18 @@
 import React from 'react'
 import { Box, Text, Image, colors } from '../common-components'
+import { useDoc } from '../Hooks';
 
-export const HomeWorkCard = ({ imgUrl, name, price, description, uid, title }) => {
+export const HomeWorkCard = ({ imgUrl, price, description, uid, title }) => {
+  const { data } = useDoc(`users/${uid}`)
+
   return (
     <Box width='300px' min_height='320px' br='10px' m='30px' borderColor={colors.borderColor} overflow='hidden'>
       <Image src={imgUrl} height='200px'/>
         <Box m='10px' display='flex' direction='column' justify='space-between' height='60px'>
           <Box display='flex' width='100%' direction='row'>
-            <Image width='30px' height='30px' br='15px' src='https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80'/>
+            <Image width='30px' height='30px' br='15px' src={imgUrl}/>
             <Box ml='10px'>
-              <Text color={colors.textColor} fs='12px'>{name}</Text>
+              <Text color={colors.textColor} fs='12px'>{data && data.username}</Text>
               <Text color={colors.textSoftColor} fs='12px'>{title}</Text>
             </Box>
           </Box>
