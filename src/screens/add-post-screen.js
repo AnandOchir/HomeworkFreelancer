@@ -2,8 +2,6 @@ import React, { useContext, useRef, useState } from "react";
 import { useCol, useFirebase } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
 
-
-
 export const AddPostScreen = () => {
   const [tags, setTags] = useState([
     "6р анги",
