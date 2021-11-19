@@ -33,8 +33,8 @@ const TAGS = [
   "Иргэний ёс зүйн боловсрол",
   "Иргэний боловсрол",
   "Математик1",
-  "Математик2"
-]
+  "Математик2",
+];
 
 export const AddPostScreen = () => {
   const { createRecord } = useCol("posts/");
@@ -47,8 +47,7 @@ export const AddPostScreen = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-
-  const [selectedTags, setSelectedTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const RandomSctringAndNumber = () => {
     let result = "";
@@ -64,10 +63,6 @@ export const AddPostScreen = () => {
   const onFileChange = () => {
     setFile(inputFile.current.files[0]);
     setImgUrl(URL.createObjectURL(inputFile.current.files[0]));
-    // console.log(URL.createObjectURL(inputFile.current.files[0]))
-    console.log(inputFile.current.files[0])
-	// console.log(URL.createObjectURL(inputFile.current.files[0]))
-	console.log(inputFile.current.files[0])
   };
 
   const AddPost = () => {
@@ -80,15 +75,29 @@ export const AddPostScreen = () => {
       price: price,
       uid: user.uid,
       status: "active",
-      tags: selectedTags
+      tags: selectedTags,
+    });
     console.log("success");
   };
 
   return (
     <div>
       <h1>Add Post</h1>
-      <input onChange={() => onFileChange(0)} type='file' id='file' ref={inputFile} />
-      <div style={{ width: '200xp', height: '200px', backgroundImage: `url("${imgUrl}")`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} />
+      <input
+        onChange={() => onFileChange(0)}
+        type="file"
+        id="file"
+        ref={inputFile}
+      />
+      <div
+        style={{
+          width: "200xp",
+          height: "200px",
+          backgroundImage: `url("${imgUrl}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "contain",
+        }}
+      />
 
       <input
         placeholder={"Title"}
@@ -105,26 +114,53 @@ export const AddPostScreen = () => {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
-      <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }} >
-        {
-          TAGS.map((tag, indx) => <div onClick={() => {
-            setSelectedTags([tag, ...selectedTags])
-            TAGS.splice(indx, 1)
-          }} style={{ height: '20px', padding: '5px', borderRadius: '5px', border: '1px solid black' , }} >{tag}</div>)
-        }
-
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {TAGS.map((tag, indx) => (
+          <div
+            onClick={() => {
+              setSelectedTags([tag, ...selectedTags]);
+              TAGS.splice(indx, 1);
+            }}
+            style={{
+              height: "20px",
+              padding: "5px",
+              borderRadius: "5px",
+              border: "1px solid black",
+            }}
+          >
+            {tag}
+          </div>
+        ))}
       </div>
-      <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: '10px' }} >
-        {
-          selectedTags.map((e, indx) => <div onClick={() => {
-            // TAGS.push(e);
-            // console.log("selce: ", selectedTags)
-            // console.log("indx: ", indx)
-            // let a = selectedTags.split(e).join('')
-            // console.log('a: ', a)
-            // setSelectedTags(a)
-          }} style={{ height: '20px', padding: '5px', borderRadius: '5px', border: '1px solid green' ,color: 'green' }} >{e}</div>)
-        }
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          marginTop: "10px",
+        }}
+      >
+        {selectedTags.map((e, indx) => (
+          <div
+            style={{
+              height: "20px",
+              padding: "5px",
+              borderRadius: "5px",
+              border: "1px solid green",
+              color: "green",
+            }}
+          >
+            {e}
+          </div>
+        ))}
       </div>
 
       <button onClick={AddPost}>Add</button>
