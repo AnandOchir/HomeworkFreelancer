@@ -47,6 +47,7 @@ export const AddPostScreen = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
+
   const [selectedTags, setSelectedTags] = useState([])
 
   const RandomSctringAndNumber = () => {
@@ -65,6 +66,8 @@ export const AddPostScreen = () => {
     setImgUrl(URL.createObjectURL(inputFile.current.files[0]));
     // console.log(URL.createObjectURL(inputFile.current.files[0]))
     console.log(inputFile.current.files[0])
+	// console.log(URL.createObjectURL(inputFile.current.files[0]))
+	console.log(inputFile.current.files[0])
   };
 
   const AddPost = () => {
@@ -78,7 +81,6 @@ export const AddPostScreen = () => {
       uid: user.uid,
       status: "active",
       tags: selectedTags
-    });
     console.log("success");
   };
 
@@ -87,6 +89,7 @@ export const AddPostScreen = () => {
       <h1>Add Post</h1>
       <input onChange={() => onFileChange(0)} type='file' id='file' ref={inputFile} />
       <div style={{ width: '200xp', height: '200px', backgroundImage: `url("${imgUrl}")`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} />
+
       <input
         placeholder={"Title"}
         value={title}
@@ -102,7 +105,6 @@ export const AddPostScreen = () => {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
-
       <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }} >
         {
           TAGS.map((tag, indx) => <div onClick={() => {

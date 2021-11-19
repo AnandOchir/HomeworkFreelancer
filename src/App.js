@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes , Route } from 'react-router-dom'
 import { AuthUserProvider } from "./Providers/auth-provider";
+import { Navigation } from "./components";
 import { HomeScreen, SignInScreen, SignUpScreen, ExploreScreen, PostScreen, AddPostScreen } from "./screens";
 
 const App = () => {
   return (
     <AuthUserProvider >
       <BrowserRouter>
+        <Navigation/>
         <Routes>
           <Route path='/' element={<HomeScreen />}/>
           <Route path='/sign-up' element={<SignUpScreen />}/>
