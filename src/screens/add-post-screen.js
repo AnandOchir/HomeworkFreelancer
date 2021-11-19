@@ -1,41 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
 import { useCol, useFirebase } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
+import { TAGS } from '../datas'
 
 export const AddPostScreen = () => {
-  const [tags, setTags] = useState([
-    "6р анги",
-    "7р анги",
-    "8р анги",
-    "9р анги",
-    "10р анги",
-    "11р анги",
-    "12р анги",
-    "1р курс",
-    "2р курс",
-    "3р курс",
-    "4р курс",
-    "Монгол хэл",
-    "Англи хэл",
-    "Физик",
-    "Газар зүй",
-    "Хими",
-    "Математик",
-    "Монголын түүх",
-    "Орос хэл",
-    "Үндэсний бичиг",
-    "түүх",
-    "Уран зохиол",
-    "Мэдээллийн технологи",
-    "Нийгэм судлал",
-    "Дизайн технологи",
-    "Эрүүл мэнд",
-    "Биологи",
-    "Иргэний ёс зүйн боловсрол",
-    "Иргэний боловсрол",
-    "Математик1",
-    "Математик2",
-  ]);
+  const [tags, setTags] = useState(TAGS);
 
   const { createRecord } = useCol("posts/");
   const { storage } = useFirebase();
