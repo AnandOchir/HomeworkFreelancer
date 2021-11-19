@@ -1,44 +1,47 @@
 import React, { useContext, useRef, useState } from "react";
-import { useCol } from "../Hooks/firebase";
+import { useCol, useFirebase } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
 
-const TAGS = [
-  "6р анги",
-  "7р анги",
-  "8р анги",
-  "9р анги",
-  "10р анги",
-  "11р анги",
-  "12р анги",
-  "1р курс",
-  "2р курс",
-  "3р курс",
-  "4р курс",
-  "Монгол хэл",
-  "Англи хэл",
-  "Физик",
-  "Газар зүй",
-  "Хими",
-  "Математик",
-  "Монголын түүх",
-  "Орос хэл",
-  "Үндэсний бичиг",
-  "түүх",
-  "Уран зохиол",
-  "Мэдээллийн технологи",
-  "Нийгэм судлал",
-  "Дизайн технологи",
-  "Эрүүл мэнд",
-  "Биологи",
-  "Иргэний ёс зүйн боловсрол",
-  "Иргэний боловсрол",
-  "Математик1",
-  "Математик2",
-];
-
 export const AddPostScreen = () => {
+  const [tags, setTags] = useState([
+    "6р анги",
+    "7р анги",
+    "8р анги",
+    "9р анги",
+    "10р анги",
+    "11р анги",
+    "12р анги",
+    "1р курс",
+    "2р курс",
+    "3р курс",
+    "4р курс",
+    "Монгол хэл",
+    "Англи хэл",
+    "Физик",
+    "Газар зүй",
+    "Хими",
+    "Математик",
+    "Монголын түүх",
+    "Орос хэл",
+    "Үндэсний бичиг",
+    "түүх",
+    "Уран зохиол",
+    "Мэдээллийн технологи",
+    "Нийгэм судлал",
+    "Дизайн технологи",
+    "Эрүүл мэнд",
+    "Биологи",
+    "Иргэний ёс зүйн боловсрол",
+    "Иргэний боловсрол",
+    "Математик1",
+    "Математик2",
+  ]);
+
   const { createRecord } = useCol("posts/");
+  const { storage } = useFirebase();
   const { user } = useContext(AuthContext);
+  const uid = user && user.uid;
+  const { createRecord: createUserPosts } = useCol("users/" + uid + "/myposts");
   const inputFile = useRef(null);
 
   const [imgUrl, setImgUrl] = useState("");
@@ -47,7 +50,7 @@ export const AddPostScreen = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [clickedTags, setClickedTags] = useState([]);
 
   const RandomSctringAndNumber = () => {
     let result = "";
@@ -65,19 +68,48 @@ export const AddPostScreen = () => {
     setImgUrl(URL.createObjectURL(inputFile.current.files[0]));
   };
 
-  const AddPost = () => {
+  const AddPost = async () => {
     let id = RandomSctringAndNumber();
-    createRecord(id, {
-      id: id,
-      imgUrl: imgUrl,
-      title: title,
-      description: description,
-      price: price,
-      uid: user.uid,
-      status: "active",
-      tags: selectedTags,
+    const ref = storage.ref("postImages/" + id);
+    await ref.put(file).then(() => {
+      console.log("Uploaded a blob or file!");
     });
+
+    storage
+      .ref("postImages/" + id)
+      .getDownloadURL()
+      .then((url) => {
+        createRecord(id, {
+          id: id,
+          imgUrl: url,
+          title: title,
+          description: description,
+          price: price,
+          uid: user.uid,
+          status: "active",
+          tags: clickedTags,
+        });
+        createUserPosts(id, {
+          postId: id,
+        });
+      });
+
+    setTitle("");
+    setDescription("");
+    setImgUrl("");
+    setClickedTags([]);
+    setPrice("");
     console.log("success");
+  };
+
+  const Filter = (tag) => {
+    setClickedTags([...clickedTags, tag]);
+    setTags(tags.filter((tg) => tg != tag));
+  };
+
+  const reFilter = (tag) => {
+    setTags([...tags, tag]);
+    setClickedTags(clickedTags.filter((tg) => tg != tag));
   };
 
   return (
@@ -122,12 +154,9 @@ export const AddPostScreen = () => {
           flexWrap: "wrap",
         }}
       >
-        {TAGS.map((tag, indx) => (
+        {tags.map((tag, indx) => (
           <div
-            onClick={() => {
-              setSelectedTags([tag, ...selectedTags]);
-              TAGS.splice(indx, 1);
-            }}
+            onClick={() => Filter(tag)}
             style={{
               height: "20px",
               padding: "5px",
@@ -148,8 +177,9 @@ export const AddPostScreen = () => {
           marginTop: "10px",
         }}
       >
-        {selectedTags.map((e, indx) => (
+        {clickedTags.map((tag, indx) => (
           <div
+            onClick={() => reFilter(tag)}
             style={{
               height: "20px",
               padding: "5px",
@@ -158,7 +188,7 @@ export const AddPostScreen = () => {
               color: "green",
             }}
           >
-            {e}
+            {tag}
           </div>
         ))}
       </div>
