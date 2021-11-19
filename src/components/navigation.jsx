@@ -35,7 +35,7 @@ export const Navigation = () => {
           </Box>
         </Box>
         <Box direction="row" display="flex">
-          <Box mr="20px" pointer onClick={() => navigate("login")}>
+          <Box mr="20px" pointer onClick={() => navigate("sign-in")}>
             <Text color={colors.supportColor}>Login</Text>
           </Box>
           <Box pointer onClick={() => navigate("sing-up")}>

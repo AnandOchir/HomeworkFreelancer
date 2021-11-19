@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { useCol, useFirebase } from "../Hooks/firebase";
+import { useCol, useFirebase, useDoc } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
 import { TAGS } from '../datas'
 
@@ -10,7 +10,7 @@ export const AddPostScreen = () => {
   const { storage } = useFirebase();
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
-  const { createRecord: createUserPosts } = useCol("users/" + uid + "/myposts");
+  const { data: userData, updateRecord: createUserPosts } = useDoc("users/" + uid);
   const inputFile = useRef(null);
 
   const [imgUrl, setImgUrl] = useState("");
@@ -40,6 +40,8 @@ export const AddPostScreen = () => {
   const AddPost = async () => {
     let id = RandomSctringAndNumber();
     const ref = storage.ref("postImages/" + id);
+    const arr = userData.posts;
+    arr.push(id)
     await ref.put(file).then(() => {
       console.log("Uploaded a blob or file!");
     });
@@ -58,8 +60,8 @@ export const AddPostScreen = () => {
           status: "active",
           tags: clickedTags,
         });
-        createUserPosts(id, {
-          postId: id,
+        createUserPosts({
+          posts: arr
         });
       });
 
