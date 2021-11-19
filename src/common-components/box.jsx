@@ -24,5 +24,10 @@ export const Box = styled.div`
     margin-bottom: ${props => props.mb};
     margin-left: ${props => props.ml};
     margin-right: ${props => props.mr};
+    padding: ${props => props.p};
+    padding-top: ${props => props.pt};
+    padding-bottom: ${props => props.pb};
+    padding-left: ${props => props.pl};
+    padding-right: ${props => props.pr};
     cursor: ${props => props.pointer && 'pointer'}
 `

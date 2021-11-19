@@ -39,6 +39,8 @@ const TAGS = [
 export const AddPostScreen = () => {
   const { createRecord } = useCol("posts/");
   const { user } = useContext(AuthContext);
+  const uid = user && user.uid
+  const { createRecord: createUserPosts } = useCol("users/" + uid + "/myposts");
   const inputFile = useRef(null);
 
   const [imgUrl, setImgUrl] = useState("");
@@ -77,6 +79,14 @@ export const AddPostScreen = () => {
       status: "active",
       tags: selectedTags,
     });
+    createUserPosts(id, {
+      postId: id
+    })
+    setImgUrl('');
+    setTitle('');
+    setDescription('');
+    setPrice('')
+    setSelectedTags([]);
     console.log("success");
   };
 
