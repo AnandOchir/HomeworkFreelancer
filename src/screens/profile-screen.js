@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Text } from "../common-components";
+import { Loading } from "../components";
 import { Posts } from "../components/posts";
 import { useDoc } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
@@ -12,17 +13,7 @@ export const ProfileScreen = () => {
 
   if (!(data && data.id != 'null')) {
     return (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1>Loading...</h1>
-      </div>
+      <Loading />
     );
   }
 

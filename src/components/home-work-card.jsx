@@ -38,7 +38,7 @@ export const HomeWorkCard = ({
         <Box display="flex" width="100%" direction="row">
           <UserCard uid={uid} title={title}/>
           <Box>
-            {tags.map((tag) => (
+            {tags && tags.map((tag) => (
               <Text color={colors.textSoftColor} fs="10px">
                 {tag}
               </Text>
