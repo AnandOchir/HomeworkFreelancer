@@ -3,6 +3,8 @@ import { Box, Text, Image, colors } from "../common-components";
 import { useDoc } from "../Hooks";
 import animationData from "./lotties/view-lottie.json";
 import Lottie from "lottie-react";
+import { useNavigate } from "react-router-dom";
+import { UserCard } from "./user-card";
 
 export const HomeWorkCard = ({
   imgUrl,
@@ -11,8 +13,10 @@ export const HomeWorkCard = ({
   uid,
   title,
   tags,
+  id,
 }) => {
   const { data } = useDoc(`users/${uid}`);
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -32,17 +36,7 @@ export const HomeWorkCard = ({
         height="60px"
       >
         <Box display="flex" width="100%" direction="row">
-          <Box display="flex" width="100%" direction="row">
-            <Image width="30px" height="30px" br="15px" src={data && data.profileImg} />
-            <Box ml="10px">
-              <Text color={colors.textColor} fs="12px">
-                {data && data.username}
-              </Text>
-              <Text color={colors.textSoftColor} fs="12px">
-                {title}
-              </Text>
-            </Box>
-          </Box>
+          <UserCard uid={uid} title={title}/>
           <Box>
             {tags.map((tag) => (
               <Text color={colors.textSoftColor} fs="10px">
@@ -65,8 +59,16 @@ export const HomeWorkCard = ({
         items="center"
         justify="space-between"
       >
-        <Box width="60px" display='flex' direction='row' items='center' height='30px' pointer>
-          <Lottie animationData={animationData}/>
+        <Box
+          width="60px"
+          display="flex"
+          direction="row"
+          items="center"
+          height="30px"
+          pointer
+          onClick={() => navigate(id)}
+        >
+          <Lottie animationData={animationData} />
           <Text fs="10px" color={colors.textColor}>
             View
           </Text>

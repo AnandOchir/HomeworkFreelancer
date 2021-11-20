@@ -27,7 +27,7 @@ export const Navigation = () => {
           <Box pointer onClick={() => navigate("/")}>
             <Text color={colors.supportColor}>Home</Text>
           </Box>
-          <Box ml='10px' pointer onClick={() => navigate("explore")}>
+          <Box ml='10px' pointer onClick={() => navigate("explore-posts")}>
             <Text color={colors.supportColor}>Explore</Text>
           </Box>
           <Box ml="10px" pointer onClick={() => navigate("add-post")}>
