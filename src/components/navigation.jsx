@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, colors, Text } from "../common-components";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../Providers/auth-provider'
 
 export const Navigation = () => {
   const navigate = useNavigate();
-
+  const { user } = useContext(AuthContext)
   return (
     <Box
       width="100vw"
@@ -35,12 +36,21 @@ export const Navigation = () => {
           </Box>
         </Box>
         <Box direction="row" display="flex">
-          <Box mr="20px" pointer onClick={() => navigate("sign-in")}>
-            <Text color={colors.supportColor}>Login</Text>
-          </Box>
-          <Box pointer onClick={() => navigate("sing-up")}>
-            <Text color={colors.supportColor}>Sign Up</Text>
-          </Box>
+          {
+            user && user.email ?
+              <Box onClick={() => navigate("/profile")} mr="20px" pointer>
+                <Text color={colors.supportColor}>{user.email}</Text>
+              </Box>
+              :
+              <>
+                <Box mr="20px" pointer onClick={() => navigate("sign-in")}>
+                  <Text color={colors.supportColor}>Login</Text>
+                </Box>
+                <Box pointer onClick={() => navigate("sing-up")}>
+                  <Text color={colors.supportColor}>Sign Up</Text>
+                </Box>
+              </>
+          }
         </Box>
       </Box>
     </Box>

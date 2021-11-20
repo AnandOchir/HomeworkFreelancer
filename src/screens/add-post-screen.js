@@ -2,11 +2,12 @@ import React, { useContext, useRef, useState } from "react";
 import { useCol, useFirebase, useDoc } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
 import { TAGS } from '../datas'
+import { Loading } from "../components";
 
 export const AddPostScreen = () => {
   const [tags, setTags] = useState(TAGS);
 
-  const { createRecord } = useCol("posts/");
+  const { createRecord, loading } = useCol("posts/");
   const { storage } = useFirebase();
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
@@ -82,6 +83,10 @@ export const AddPostScreen = () => {
     setTags([...tags, tag]);
     setClickedTags(clickedTags.filter((tg) => tg != tag));
   };
+
+  if(loading) {
+    return <Loading />
+  }
 
   return (
     <div>
