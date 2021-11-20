@@ -13,7 +13,7 @@ export const HomeScreen = () => {
         <Text color={colors.supportColor} fs='35px'>Are you having any troubles with homeworks?</Text>
         <Text color={colors.supportColor} fs='18px'>Then we are here for you</Text>
         <Box mt='2%' pointer>
-          <Text fs='40px' color='white' onClick={() => navigate('explore')}>Explore homeworks</Text>
+          <Text fs='40px' color='white' onClick={() => navigate('explore-posts')}>Explore homeworks</Text>
           <Text fs='40px' color='white' onClick={() => navigate('add-post')}>Post homeworks</Text>
         </Box>
       </Box>

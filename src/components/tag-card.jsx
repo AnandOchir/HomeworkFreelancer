@@ -4,7 +4,7 @@ import { Box, Text, colors } from "../common-components";
 export const TagCard = ({ tag, onClick }) => {
   return (
     <Box
-      min-width="60px"
+      width="100px"
       height="25px"
       background="white"
       borderColor={colors.borderColor}

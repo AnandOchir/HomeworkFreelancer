@@ -84,9 +84,9 @@ export const ExploreScreen = () => {
               ))}
             </Box>
           </Box>
-          <Box display="flex" direction="row" wrap="wrap" width='100%'>
+          <Box display="flex" direction="row" wrap="wrap" width='100%' ml='30px'>
             {homeworks.map((hw, i) => (
-              <HomeWorkCard {...hw} key={i} />
+              <HomeWorkCard {...hw} key={i}/>
             ))}
           </Box>
         </Box>
