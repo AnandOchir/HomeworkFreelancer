@@ -28,4 +28,6 @@ export const Input = styled.input`
       box-shadow: ${(props) => props.focus && '0 5px 10px rgba(33, 33, 33, 0.2)'};
       opacity: ${(props) => props.focus && 0.9};
     }
+    position: ${props => props.position};
+    display: ${props => props.display};
 `

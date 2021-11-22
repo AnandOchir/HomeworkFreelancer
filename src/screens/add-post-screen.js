@@ -1,8 +1,9 @@
 import React, { useContext, useRef, useState } from "react";
 import { useCol, useFirebase, useDoc } from "../Hooks/firebase";
 import { AuthContext } from "../Providers/auth-provider";
-import { TAGS } from '../datas'
-import { Loading } from "../components";
+import { TAGS, DefaultImgUrl } from "../datas";
+import { Loading, TagCard } from "../components";
+import { Box, Image, Text, colors, Input } from "../common-components";
 
 export const AddPostScreen = () => {
   const [tags, setTags] = useState(TAGS);
@@ -11,7 +12,9 @@ export const AddPostScreen = () => {
   const { storage } = useFirebase();
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
-  const { data: userData, updateRecord: createUserPosts } = useDoc("users/" + uid);
+  const { data: userData, updateRecord: createUserPosts } = useDoc(
+    "users/" + uid
+  );
   const inputFile = useRef(null);
 
   const [imgUrl, setImgUrl] = useState("");
@@ -42,7 +45,7 @@ export const AddPostScreen = () => {
     let id = RandomSctringAndNumber();
     const ref = storage.ref("postImages/" + id);
     const arr = userData.posts;
-    arr.push(id)
+    arr.push(id);
     await ref.put(file).then(() => {
       console.log("Uploaded a blob or file!");
     });
@@ -62,7 +65,7 @@ export const AddPostScreen = () => {
           tags: clickedTags,
         });
         createUserPosts({
-          posts: arr
+          posts: arr,
         });
       });
 
@@ -84,92 +87,99 @@ export const AddPostScreen = () => {
     setClickedTags(clickedTags.filter((tg) => tg != tag));
   };
 
-  if(loading) {
-    return <Loading />
+  if (loading) {
+    return <Loading />;
   }
 
   return (
-    <div>
-      <h1>Add Post</h1>
-      <input
-        onChange={() => onFileChange(0)}
-        type="file"
-        id="file"
-        ref={inputFile}
-      />
-      <div
-        style={{
-          width: "200xp",
-          height: "200px",
-          backgroundImage: `url("${imgUrl}")`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-        }}
-      />
-
-      <input
-        placeholder={"Title"}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        placeholder={"description"}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        placeholder={"Price"}
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        {tags.map((tag, indx) => (
-          <div
-            onClick={() => Filter(tag)}
-            style={{
-              height: "20px",
-              padding: "5px",
-              borderRadius: "5px",
-              border: "1px solid black",
-            }}
-          >
-            {tag}
-          </div>
-        ))}
-      </div>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-          marginTop: "10px",
-        }}
-      >
-        {clickedTags.map((tag, indx) => (
-          <div
-            onClick={() => reFilter(tag)}
-            style={{
-              height: "20px",
-              padding: "5px",
-              borderRadius: "5px",
-              border: "1px solid green",
-              color: "green",
-            }}
-          >
-            {tag}
-          </div>
-        ))}
-      </div>
-
-      <button onClick={AddPost}>Add</button>
-    </div>
+    <Box m="30px" mt='90px' display="flex" direction="row" justify="space-between">
+      <Box display='flex' items='center' direction='column'>
+        <Box>
+          <Input
+            onChange={() => onFileChange(0)}
+            type="file"
+            id="file"
+            ref={inputFile}
+            display='none'
+          />
+          <Box onClick={() => inputFile.current.click()} width="500px" height="300px" mt="10px" pointer>
+            <Image src={imgUrl ? imgUrl : DefaultImgUrl} />
+          </Box>
+          <Box mt="10px">
+            <Text>Гэрийн даалгаврын нэр: </Text>
+            <Box mt="10px" color={colors.textColor}>
+              <Input
+                placeholder={"Title"}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                height="30px"
+                width="700px"
+                color={colors.textColor}
+              />
+            </Box>
+          </Box>
+          <Box mt="20px">
+            <Text color={colors.textColor}>Дэлгэрэнгүй тайлбарлана уу?: </Text>
+            <Box mt="10px">
+              <Input
+                placeholder={"description"}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                height="30px"
+                width="700px"
+                color={colors.textColor}
+              />
+            </Box>
+          </Box>
+          <Box mt="20px">
+            <Text color={colors.textColor}>Үнэ: </Text>
+            <Box mt="10px" display="flex" direction="row">
+              <Input
+                placeholder={"5000"}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                width="40px"
+              />
+              <Text color={colors.textColor}>(tugruk)</Text>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          width="250px"
+          height="40px"
+          borderColor={colors.borderColor}
+          br="5px"
+          display="flex"
+          justify="center"
+          items="center"
+          onClick={AddPost}
+          pointer
+          mt='50px'
+        >
+          Даалгаврыг нийтлэх
+        </Box>
+      </Box>
+      <Box display="flex" direction="row" justify="space-between" width="400px">
+        <Box>
+          <Box width="100px" display="flex" wrap="wrap" height="100px">
+            {clickedTags.map((tag, index) => (
+              <TagCard
+                tag={tag}
+                key={index}
+                onClick={() => reFilter(tag)}
+                clicked
+              />
+            ))}
+          </Box>
+        </Box>
+        <Box>
+          <Box width="250px" display="flex" wrap="wrap">
+            {tags.map((tag, index) => (
+              <TagCard tag={tag} key={index} onClick={() => Filter(tag)} />
+            ))}
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };

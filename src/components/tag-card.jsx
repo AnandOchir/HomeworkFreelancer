@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Text, colors } from "../common-components";
 
-export const TagCard = ({ tag, onClick }) => {
+export const TagCard = ({ tag, onClick, clicked = false }) => {
   return (
     <Box
       width="100px"
       height="25px"
       background="white"
-      borderColor={colors.borderColor}
+      borderColor={clicked ? colors.borderActiveColor : colors.borderColor}
       br="5px"
       display="flex"
       justify="center"
