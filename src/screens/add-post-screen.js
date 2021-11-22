@@ -4,6 +4,8 @@ import { AuthContext } from "../Providers/auth-provider";
 import { TAGS, DefaultImgUrl } from "../datas";
 import { Loading, TagCard } from "../components";
 import { Box, Image, Text, colors, Input } from "../common-components";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 export const AddPostScreen = () => {
   const [tags, setTags] = useState(TAGS);
@@ -107,7 +109,7 @@ export const AddPostScreen = () => {
           </Box>
           <Box mt="10px">
             <Text>Гэрийн даалгаврын нэр: </Text>
-            <Box mt="10px" color={colors.textColor}>
+            <Box mt="10px" >
               <Input
                 placeholder={"Title"}
                 value={title}
@@ -120,7 +122,7 @@ export const AddPostScreen = () => {
           </Box>
           <Box mt="20px">
             <Text color={colors.textColor}>Дэлгэрэнгүй тайлбарлана уу?: </Text>
-            <Box mt="10px">
+            {/* <Box mt="10px">
               <Input
                 placeholder={"description"}
                 value={description}
@@ -129,7 +131,14 @@ export const AddPostScreen = () => {
                 width="700px"
                 color={colors.textColor}
               />
-            </Box>
+            </Box> */}
+            <Editor
+              // editorState={editorState}
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+              // onEditorStateChange={this.onEditorStateChange}
+            />
           </Box>
           <Box mt="20px">
             <Text color={colors.textColor}>Үнэ: </Text>
