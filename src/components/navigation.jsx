@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, colors, Text } from "../common-components";
+import { AnimatedText, Box, colors, Animation } from "../common-components";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../Providers/auth-provider'
 
@@ -20,34 +20,34 @@ export const Navigation = () => {
         m="30px"
         display="flex"
         direction="row"
-        justify="space-between"
+        justify="space-around"
         items="center"
         width="100vw"
       >
-        <Box direction="row" display="flex">
+        <Box direction="row" display="flex" width="15%" justify="space-between">
           <Box pointer onClick={() => navigate("/")}>
-            <Text color={colors.supportColor}>Home</Text>
+            <AnimatedText >Home</AnimatedText>
           </Box>
           <Box ml='10px' pointer onClick={() => navigate("explore-posts")}>
-            <Text color={colors.supportColor}>Explore</Text>
+            <AnimatedText >Explore</AnimatedText>
           </Box>
           <Box ml="10px" pointer onClick={() => navigate("add-post")}>
-            <Text color={colors.supportColor}>Post</Text>
+            <AnimatedText >Post</AnimatedText>
           </Box>
         </Box>
-        <Box direction="row" display="flex">
+        <Box direction="row" display="flex" width="10%" justify="space-between">
           {
             user && user.email ?
               <Box onClick={() => navigate("/profile")} mr="20px" pointer>
-                <Text color={colors.supportColor}>{user.email}</Text>
+                <AnimatedText >{user.email}</AnimatedText>
               </Box>
               :
               <>
                 <Box mr="20px" pointer onClick={() => navigate("sign-in")}>
-                  <Text color={colors.supportColor}>Login</Text>
+                  <AnimatedText >Login</AnimatedText>
                 </Box>
                 <Box pointer onClick={() => navigate("sign-up")}>
-                  <Text color={colors.supportColor}>Sign Up</Text>
+                  <AnimatedText >Sign Up</AnimatedText>
                 </Box>
               </>
           }

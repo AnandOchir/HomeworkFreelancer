@@ -14,14 +14,18 @@ export const UserCard = ({ uid, title, detailed }) => {
         br='50%'
         src={data && data.profileImg}
       />
-      <Box ml="10px">
-        <Text color={colors.textColor} fs={size.font}>
+      <Box ml="10px" display="flex" direction="row" width="100%" items="center" justify="space-between">
+        <Text hover cursor color={colors.textColor} fs={size.font}>
           {data && data.username}
         </Text>
-        <Text color={colors.textSoftColor} fs={size.font}>
-          {title}
-        </Text>
-        {detailed && <Text color={colors.textSoftColor} fs={size.font}>{data && data.phonenumber}</Text>}
+        <Box>
+          <Text color={colors.textSoftColor} fs={"32px"}>
+            {title}
+          </Text>
+        </Box>
+        <Box display="flex" height="100%" items="end">
+          {detailed && <Text color={colors.textSoftColor} fs={size.font}>Phone:{data && data.phonenumber}</Text>}
+        </Box>
       </Box>
     </Box>
   );

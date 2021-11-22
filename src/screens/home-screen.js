@@ -13,8 +13,8 @@ export const HomeScreen = () => {
         <Text color={colors.supportColor} fs='35px'>Are you having any troubles with homeworks?</Text>
         <Text color={colors.supportColor} fs='18px'>Then we are here for you</Text>
         <Box mt='2%' pointer>
-          <Text fs='40px' color='white' onClick={() => navigate('explore-posts')}>Explore homeworks</Text>
-          <Text fs='40px' color='white' onClick={() => navigate('add-post')}>Post homeworks</Text>
+          <Text fs='40px' color='white' hover onClick={() => navigate('explore-posts')}>Explore homeworks</Text>
+          <Text fs='40px' color='white' hover onClick={() => navigate('add-post')}>Post homeworks</Text>
         </Box>
       </Box>
       <Box mr='100px' br='50px' overflow='hidden'>
