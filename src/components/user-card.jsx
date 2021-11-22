@@ -19,8 +19,13 @@ export const UserCard = ({ uid, title, detailed }) => {
           {data && data.username}
         </Text>
         <Box>
-          <Text color={colors.textSoftColor} fs={"32px"}>
-            {title}
+          <Text color={colors.textSoftColor} fs={"16px"}>
+            {
+              title.length > 8 ?
+                title.slice(0, 8) + '...'
+              :
+                title
+            }
           </Text>
         </Box>
         <Box display="flex" height="100%" items="end">
