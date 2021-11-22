@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Text, Image, colors } from "../common-components";
+import { Box, Text, Image, colors, Button } from "../common-components";
 import animationData from "./lotties/view-lottie.json";
 import Lottie from "lottie-react";
 import { useNavigate } from "react-router-dom";
 import { UserCard } from "./user-card";
+import { useDoc } from "../Hooks";
 
 export const HomeWorkCard = ({
   imgUrl,
@@ -15,6 +16,15 @@ export const HomeWorkCard = ({
   id,
 }) => {
   const navigate = useNavigate();
+  const url = window.location.pathname
+  const { deleteRecord, updateRecord, data } = useDoc('/users/'+uid)
+
+  const deletePost = () => {
+    deleteRecord('/posts/'+id)
+    updateRecord({
+      posts: data.posts.filter((e) => e != id)
+    })
+  }
 
   return (
     <Box
@@ -46,7 +56,7 @@ export const HomeWorkCard = ({
         <Box min_height="20px">
           <Text color={colors.textColor} fs="14px">
             {
-              description.length > 55 ?
+              description && description.length > 55 ?
                 description.slice(0, 55) + '...'
               :
                 description
@@ -76,6 +86,10 @@ export const HomeWorkCard = ({
             View
           </Text>
         </Box>
+        {
+          url == '/profile' &&
+            <Button br={'5px'} borderColor={'red'} bcolor={'white'} pointer color={'red'} onClick={deletePost} >delete</Button>          
+        }
         <Text fs="14px">{price}MNT</Text>
       </Box>
     </Box>
