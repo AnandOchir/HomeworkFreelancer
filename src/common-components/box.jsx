@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '.';
 
 export const Box = styled.div`
     background-color: ${props => props.color};
@@ -33,3 +34,27 @@ export const Box = styled.div`
     cursor: ${props => props.pointer && 'pointer'};
     box-shadow: ${props => props.shadow && '10px 10px 10px rgb(0 0 0 / 0.5)'};
 `
+export const AnimatedText = styled.text`
+    font-size: 18px;
+    color: white;
+    :hover  {
+        color: #48a0f8;
+    }
+    :after {    
+        background: none repeat scroll 0 0
+        transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 3px;
+        left: 50%;
+        background: #48a0f8;
+        transition: width 0.3s ease 0s, left 0.3s 
+        ease 0s;
+        width: 0;
+    }
+    :hover:after { 
+        width: 100%; 
+        left: 0;
+    }
+    `

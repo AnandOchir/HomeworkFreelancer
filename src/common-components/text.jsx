@@ -11,4 +11,8 @@ export const Text = styled.div`
     margin-bottom: ${props => props.mb};
     margin-left: ${props => props.ml};
     margin-right: ${props => props.mr};
+    :hover{
+        color: ${props => props.hover && "#51d6f8"};
+    }
+    cursor: ${props => props.cursor && "pointer"};
 `
