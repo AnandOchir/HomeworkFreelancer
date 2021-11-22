@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCol, useFirebase } from "../Hooks/firebase";
 import { useNavigate } from "react-router-dom";
+import { Text, Box, colors, Input, Button } from "../common-components/";
 
 export const SignUpScreen = () => {
   const navigate = useNavigate()
@@ -11,8 +12,10 @@ export const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState("")
 
   const SignUp = () => {
+    setLoading("Loading ...")
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -27,6 +30,7 @@ export const SignUpScreen = () => {
             profileImg: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
             posts: []
           });
+          setLoading("success")
           console.log("success");
           navigate("/");
         } catch {
@@ -40,31 +44,77 @@ export const SignUpScreen = () => {
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <input
-        placeholder={"username"}
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        placeholder={"email"}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        maxLength={8}
-        placeholder={"phone number"}
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-      />
-      <input
-        placeholder={"password"}
-        type={"password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={SignUp}>Sign up</button>
-    </div>
+    // <div>
+    //   <h1>Sign Up</h1>
+    //   <input
+    //     placeholder={"username"}
+    //     value={username}
+    //     onChange={(e) => setUsername(e.target.value)}
+    //   />
+    //   <input
+    //     placeholder={"email"}
+    //     value={email}
+    //     onChange={(e) => setEmail(e.target.value)}
+    //   />
+    //   <input
+    //     maxLength={8}
+    //     placeholder={"phone number"}
+    //     value={number}
+    //     onChange={(e) => setNumber(e.target.value)}
+    //   />
+    //   <input
+    //     placeholder={"password"}
+    //     type={"password"}
+    //     value={password}
+    //     onChange={(e) => setPassword(e.target.value)}
+    //   />
+    //   <button onClick={SignUp}>Sign up</button>
+    // </div>
+    <Box color={colors.mainColor} width={'100%'} height={`${window.innerHeight - 60}px`} display={'flex'} justify={'center'} items={'center'}>
+    <Box br={'15px'} shadow={true} color={'white'} display={'flex'} direction={'column'} width={'30vw'} height={'500px'} mt={'15px'} items={'center'} >
+      <Box width={'100%'}>
+        <Text m={'10px'} mt={'30px'} textAlign={'center'} fw={600} fs={'30px'}>Sign Up</Text>
+        <Box mb={'20px'} width={'100%'} display={'flex'} items={'center'} direction={"column"} >
+          <Text opacity={"0.5"}>Username</Text>
+          <Input
+            width={'80%'} borderColor={'black'} br={'5px'} p={'5px'} fs={'20px'}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Box>
+        <Box mb={'20px'} width={'100%'} display={'flex'} items={'center'} direction={"column"} >
+          <Text opacity={"0.5"}>Email</Text>
+          <Input
+            width={'80%'} borderColor={'black'} br={'5px'} p={'5px'} fs={'20px'}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Box>
+        <Box mb={'20px'} width={'100%'} display={'flex'} items={'center'} direction={"column"} >
+          <Text opacity={"0.5"}>Phone Number</Text>
+          <Input
+            width={'80%'} borderColor={'black'} br={'5px'} p={'5px'} fs={'20px'}
+            maxLength={8}
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+          />
+        </Box>
+        <Box mb={'20px'} width={'100%'} display={'flex'} items={'center'} direction={"column"} >
+          <Text opacity={"0.5"}>Password</Text>
+          <Input
+            width={'80%'} borderColor={'black'} br={'5px'} p={'5px'} fs={'20px'}
+            type={"password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Box>
+      </Box>
+      <Text>{loading}</Text>
+      <Button
+        p={'5px'} width={'200px'} height={'40px'} fs={'17px'} fw={'bold'} bcolor={colors.mainColor} br={'5px'}
+        mt={'20%'} borderColor={colors.mainColor}
+        onClick={SignUp}>SIGN UP</Button>
+    </Box>
+  </Box>
   );
 };
