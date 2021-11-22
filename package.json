@@ -11,6 +11,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.3",
