@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Box = styled.div`
+    background-color: ${props => props.color};
     width: ${props => props.width};
     height: ${props => props.height};
     flex-wrap: ${props => props.wrap};
@@ -29,5 +30,6 @@ export const Box = styled.div`
     padding-bottom: ${props => props.pb};
     padding-left: ${props => props.pl};
     padding-right: ${props => props.pr};
-    cursor: ${props => props.pointer && 'pointer'}
+    cursor: ${props => props.pointer && 'pointer'};
+    box-shadow: ${props => props.shadow && '10px 10px 10px rgb(0 0 0 / 0.5)'};
 `
