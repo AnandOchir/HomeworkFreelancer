@@ -85,9 +85,13 @@ export const ExploreScreen = () => {
             </Box>
           </Box>
           <Box display="flex" direction="row" wrap="wrap" width='100%' ml='30px'>
-            {homeworks.map((hw, i) => (
-              <HomeWorkCard {...hw} key={i}/>
-            ))}
+            {homeworks.map((hw, i) => {
+              if(hw.status == 'active') {
+                return (
+                  <HomeWorkCard {...hw} key={i}/>
+                )
+              }
+            })}
           </Box>
         </Box>
       ) : (

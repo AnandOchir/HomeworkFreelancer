@@ -21,7 +21,7 @@ export const UserCard = ({ uid, title, detailed }) => {
         <Box>
           <Text color={colors.textSoftColor} fs={"16px"}>
             {
-              title.length > 8 ?
+              title && title.length > 8 ?
                 title.slice(0, 8) + '...'
               :
                 title

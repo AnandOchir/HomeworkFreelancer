@@ -17,7 +17,7 @@ export const TagCard = ({ tag, onClick, clicked = false }) => {
       onClick={onClick}
       p='5px'
     >
-      <Text fs="12px" color="orange">
+      <Text fs="12px" color="#0000FF">
         {tag}
       </Text>
     </Box>
