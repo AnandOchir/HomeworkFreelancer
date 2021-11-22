@@ -21,4 +21,11 @@ export const Input = styled.input`
     font-size: ${props => props.fs};
     color: ${props => props.color};
     font-weight: ${props => props.fw};
+    outline: none;
+
+    transition: ${(props) => props.focus && "box-shadow 0.3s"};
+    :focus {
+      box-shadow: ${(props) => props.focus && '0 5px 10px rgba(33, 33, 33, 0.2)'};
+      opacity: ${(props) => props.focus && 0.9};
+    }
 `

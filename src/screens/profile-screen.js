@@ -60,7 +60,7 @@ export const ProfileScreen = () => {
             </div>
           </Box>
         </Box>
-        <Box br={'5px'} borderColor={'red'} p={'5px'} onClick={() => auth.signOut()}>
+        <Box pointer br={'5px'} borderColor={'red'} p={'5px'} onClick={() => auth.signOut()}>
           <Text color={'red'} fw={'600'} fs={'15px'} >Log Out</Text>
         </Box>
       </Box>

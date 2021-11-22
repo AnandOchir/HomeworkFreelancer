@@ -1,8 +1,8 @@
-import React from 'react'
-import { Box, Text, colors } from '../common-components';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Box, Text, colors } from "../common-components";
+import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import animationData from '../components/lotties/books-lottie.json';
+import animationData from "../components/lotties/books-lottie.json";
 
 export const HomeScreen = () => {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ export const HomeScreen = () => {
           <Text fs='40px' color='white' hover onClick={() => navigate('add-post')}>Post homeworks</Text>
         </Box>
       </Box>
-      <Box mr='100px' br='50px' overflow='hidden'>
-        <Lottie animationData={animationData}/>
+      <Box mr="100px" br="50px" overflow="hidden">
+        <Lottie animationData={animationData} />
       </Box>
     </Box>
   );
-}
+};

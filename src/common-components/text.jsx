@@ -15,4 +15,6 @@ export const Text = styled.div`
         color: ${props => props.hover && "#51d6f8"};
     }
     cursor: ${props => props.cursor && "pointer"};
+    position: ${props => props.position};
+    font-family: 'Comfortaa', cursive;
 `
