@@ -45,7 +45,12 @@ export const HomeWorkCard = ({
         </Box>
         <Box min_height="20px">
           <Text color={colors.textColor} fs="14px">
-            {description}
+            {
+              description.length > 55 ?
+                description.slice(0, 55) + '...'
+              :
+                description
+            }
           </Text>
         </Box>
       </Box>
