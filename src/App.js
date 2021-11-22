@@ -10,10 +10,11 @@ const App = () => {
     <AuthUserProvider >
       <BrowserRouter>
         <Navigation/>
-        <Box mt={'60px'} >
+        <Box mt='60px'>
           <Routes>
             <Route path='/' element={<HomeScreen/>}/>
             <Route path='explore-posts/*' element={<HomeWorkViewScreen/>}/>
+            <Route path='profile/*' element={<HomeWorkViewScreen/>}/>
             <Route path='/sign-up' element={<SignUpScreen />}/>
             <Route path='/sign-in' element={<SignInScreen />}/>
             <Route path='/explore-posts' element={<ExploreScreen />}/>

@@ -5,4 +5,5 @@ export const colors = {
     borderColor: '#e4e5e7',
     textColor: '#404145',
     textSoftColor: '#7a7d85',
+    borderActiveColor: '#92ff91',
 }

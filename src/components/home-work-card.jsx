@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Text, Image, colors } from "../common-components";
-import { useDoc } from "../Hooks";
 import animationData from "./lotties/view-lottie.json";
 import Lottie from "lottie-react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ export const HomeWorkCard = ({
   tags,
   id,
 }) => {
-  const { data } = useDoc(`users/${uid}`);
   const navigate = useNavigate();
 
   return (

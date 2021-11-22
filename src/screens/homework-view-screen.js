@@ -6,7 +6,7 @@ import { Loading, UserCard } from "../components";
 
 export const HomeWorkViewScreen = () => {
   const { pathname } = useLocation();
-  const { data, updateRecord, loading } = useDoc(`posts${pathname.slice(14)}`);
+  const { data, loading, updateRecord } = useDoc(`posts/${pathname.split('/')[pathname.split.length]}`);
 
   const Accept = () =>{
     updateRecord({
@@ -17,8 +17,6 @@ export const HomeWorkViewScreen = () => {
       console.log(err)
     })
   }
-
-  console.log(data);
 
   return (
     <Box
