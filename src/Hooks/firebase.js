@@ -1,16 +1,15 @@
 import firebase from 'firebase';
 import { useState, useEffect } from 'react';
-// import "firebase/storage"
 
 const config = {
-    apiKey: "AIzaSyBjkcUazf5gY8LzzLOhODI1mg61cMikJOY",
-    authDomain: "homework-freelancer.firebaseapp.com",
-    projectId: "homework-freelancer",
-    storageBucket: "homework-freelancer.appspot.com",
-    messagingSenderId: "993255476216",
-    appId: "1:993255476216:web:b0d432a4f016d59f98a40d",
-    measurementId: "G-NXM0P0HE92"
-};
+    apiKey: "AIzaSyBB8qTIBI_27bRMn8JXcRLh9sUq05glUvY",
+    authDomain: "it-club-web.firebaseapp.com",
+    projectId: "it-club-web",
+    storageBucket: "it-club-web.appspot.com",
+    messagingSenderId: "638254319365",
+    appId: "1:638254319365:web:f778b41e85de13fc68596c",
+    measurementId: "G-CKJJGHYPD2"
+  };
 
 export const useFirebase = () => {
     const [state, setState] = useState({ firebase });

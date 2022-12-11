@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { colors } from '.';
 
 export const Box = styled.div`
     background-color: ${props => props.color};
@@ -11,6 +10,7 @@ export const Box = styled.div`
     min-height: ${props => props.min_height};
     position: ${props => props.position};
     display: ${props => props.display};
+    opacity: ${props => props.opacity};
     justify-content: ${props => props.justify};
     border: ${props => '1px solid ' + props.borderColor};
     border-top: ${props => '1px solid ' + props.borderTopColor};
@@ -32,6 +32,7 @@ export const Box = styled.div`
     padding-left: ${props => props.pl};
     padding-right: ${props => props.pr};
     cursor: ${props => props.pointer && 'pointer'};
+    z-index: ${props => props.z};
     box-shadow: ${props => props.shadow && '10px 10px 10px rgb(0 0 0 / 0.5)'};
 `
 export const AnimatedText = styled.text`

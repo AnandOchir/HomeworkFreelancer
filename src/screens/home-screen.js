@@ -10,11 +10,9 @@ export const HomeScreen = () => {
   return (
     <Box width='100vw' height='100vh' background={colors.mainColor} display='flex' direction='row'items='center'>
       <Box m='18%'>
-        <Text color={colors.supportColor} fs='35px'>Are you having any troubles with homeworks?</Text>
-        <Text color={colors.supportColor} fs='18px'>Then we are here for you</Text>
-        <Box mt='2%' pointer>
-          <Text fs='40px' color='white' hover onClick={() => navigate('explore-posts')}>Explore homeworks</Text>
-          <Text fs='40px' color='white' hover onClick={() => navigate('add-post')}>Post homeworks</Text>
+        <Text color={colors.supportColor} fs='24px' width='250px'>Welcome to shine mongol it club website!!!</Text>
+        <Box mt='10vh' pointer>
+          <Text fs='48px' color='white' hover onClick={() => navigate('explore-clubs')}>Explore clubs</Text>
         </Box>
       </Box>
       <Box mr="100px" br="50px" overflow="hidden">
